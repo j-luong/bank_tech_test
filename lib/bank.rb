@@ -5,18 +5,23 @@ class Bank
 
   def initialize
     @balance = 0
+    @transaction_log = TransactionsLog.new
   end
 
   def deposit_money(amount)
     raise "Invalid amount" if invalid_amount?(amount)
     @balance += amount
-    log_transaction({debit: amount}, @balance)
+    log_transaction(:debit, amount, @balance)
   end
 
   def withdraw_money(amount)
     raise "Insufficient funds" if insufficient_funds?(amount)
     @balance -= amount
-    log_transaction({credit: amount}, @balance)
+    log_transaction(:credit, amount, @balance)
+  end
+
+  def print_statement
+    @transaction_log.print_statement
   end
 
   private
@@ -29,8 +34,8 @@ class Bank
     amount <= 0
   end
 
-  def log_transaction(type, balance)
-    @transaction_log = TransactionsLog.new(type, balance)
+  def log_transaction(type, amount, balance)
+    @transaction_log.new_transaction(type, amount, balance)
     @transaction_log.log_transaction
   end
 end
