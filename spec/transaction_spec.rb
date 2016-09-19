@@ -7,7 +7,7 @@ describe Transaction do
 
   describe '#initialize' do
     it "has a date" do
-      expect(transactions.date).to eq(DateTime.now.strftime('%d/%m/%Y'))
+      expect(transactions.date).to eq(Time.now.strftime('%d/%m/%Y'))
     end
 
     it "has a type" do
