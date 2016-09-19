@@ -6,7 +6,6 @@ describe Bank do
   before(:each) { bank_with_money.deposit_money(100) }
 
   describe 'class methods' do
-    it { is_expected.to respond_to :print_menu }
     it { is_expected.to respond_to :balance }
     it { is_expected.to respond_to(:deposit_money).with(1).argument }
     it { is_expected.to respond_to(:withdraw_money).with(1).argument }
