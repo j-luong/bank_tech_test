@@ -14,6 +14,22 @@ class Bank
   end
 
   def deposit_money(amount)
+    raise "Invalid amount" if invalid_amount?(amount)
     @balance += amount
+  end
+
+  def withdraw_money(amount)
+    raise "Insufficient funds" if insufficient_funds?(amount)
+    @balance -= amount
+  end
+
+  private
+
+  def insufficient_funds?(amount)
+    @balance - amount < 0
+  end
+
+  def invalid_amount?(amount)
+    amount <= 0
   end
 end
